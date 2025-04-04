@@ -8,6 +8,8 @@ export default defineConfig({
     loader: 'jsx',
     include: /src\/.*\.jsx?$/,
     exclude: [],
+    jsxFactory: 'React.createElement',
+    jsxFragment: 'React.Fragment',
   },
   server: {
     middleware: (req, res, next) => {
@@ -17,16 +19,7 @@ export default defineConfig({
       next();
     }
   },
-  build: {
-    rollupOptions: {
-      output: {
-        assetFileNames: (assetInfo) => {
-          if (/\.(jsx)$/.test(assetInfo.name)) {
-            return `${assetInfo.name.replace(/\.jsx$/, '.js')}`;
-          }
-          return assetInfo.name;
-        }
-      }
-    }
+  resolve: {
+    extensions: ['.js', '.jsx'],
   }
 })
