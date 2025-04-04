@@ -16,5 +16,17 @@ export default defineConfig({
       }
       next();
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (/\.(jsx)$/.test(assetInfo.name)) {
+            return `${assetInfo.name.replace(/\.jsx$/, '.js')}`;
+          }
+          return assetInfo.name;
+        }
+      }
+    }
   }
 })
